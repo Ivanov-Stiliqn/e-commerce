@@ -1,0 +1,112 @@
+<banner></banner>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 contact_col">
+        <div class="get_in_touch">
+          <div class="section_title">Hi, there !</div>
+          <div class="section_subtitle">You can register by following the form bellow: </div>
+          <div class="contact_form_container">
+            <form #registerForm="ngForm" (ngSubmit)="onSubmit()" id="contact_form" class="contact_form">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username"
+                       required
+                       name="username"
+                       #username="ngModel"
+                       [pattern]="'^[a-zA-z0-9]+$'"
+                       [(ngModel)]="user.username">
+                <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                  Username must contain only letters and digits !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"
+                       required
+                       name="password"
+                       [pattern]="'^[a-zA-z0-9]+$'"
+                       minlength="4"
+                       maxlength="16"
+                       #password="ngModel"
+                       [(ngModel)]="user.password">
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                  Password should be between 4 and 16 symbols and should contain only letters and digits !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword"
+                       [pattern]="'^[a-zA-z0-9]+$'"
+                       name="confirmPass"
+                       #confirmPassword="ngModel"
+                       [(ngModel)]="confirmPass"
+                       required>
+                <div [hidden]="password.value === confirmPassword.value || confirmPassword.pristine"
+                     class="alert alert-danger">
+                  Passwords do not match !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName"
+                       required
+                       name="firstName"
+                       #firstName="ngModel"
+                       [pattern]="'^[A-Z][a-zA-z]+$'"
+                       [(ngModel)]="user.firstName">
+                <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+                  Names should contain only letters nad starts with Capital !
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName"
+                       required
+                       name="lastName"
+                       #lastName="ngModel"
+                       [pattern]="'^[A-Z][a-zA-z]+$'"
+                       [(ngModel)]="user.lastName">
+                <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+                  Names should contain only letters nad starts with Capital !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email"
+                       required
+                       name="email"
+                       #email="ngModel"
+                       [pattern]="'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}'"
+                       [(ngModel)]="user.email">
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                  Email is invalid.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="text"
+                       class="form-control"
+                       id="phone"
+                       name='phone'
+                       [pattern]="'^\\+359\\d{9,9}$'"
+                       [(ngModel)]="user.phone"
+                        #phone="ngModel"
+                        >
+                <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                  Phone number is invalid.
+                </div>
+              </div>
+
+              <button type="submit" class="button contact_button"
+                      [disabled]="!registerForm.valid && password.value === confirmPassword.value"><span>Register</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
