@@ -22,6 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log(req);
     if (req.url.endsWith('login') || req.url.endsWith(appKey)) {
       req = req.clone({
         setHeaders: {
@@ -29,7 +30,15 @@ export class TokenInterceptor implements HttpInterceptor {
           'Content-Type': 'application/json'
         }
       });
-    } else {
+    }
+    else if(req.url.includes('upload')){
+      req = req.clone({
+        setHeaders: {
+         'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+    }
+    else {
       if(localStorage.getItem('authtoken') !== null){
         req = req.clone({
           setHeaders: {

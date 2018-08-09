@@ -1,0 +1,36 @@
+<div [hidden]="!displaySpinner" class="spinner">
+  <app-radar-spinner
+    [animationDuration]="1000"
+    [size]="200"
+    [color]="'#666666'">
+  </app-radar-spinner>
+</div>
+
+<div [hidden]="displaySpinner">
+  <slider></slider>
+  <app-upper-ads></app-upper-ads>
+  <!-- Products -->
+  <div class="products">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+
+          <div class="product_grid">
+            <div class="product" *ngFor="let product of products">
+              <div class="product_image"><img src="{{product.image}}" alt=""></div>
+              <div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
+              <div class="product_content">
+                <div class="product_title"><a routerLink="/products/product-details/{{product._id}}">{{product.name}}</a></div>
+                <div class="product_price">${{product.price}}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-bottom-ads></app-bottom-ads>
+    <app-icons></app-icons>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import {LoginModel} from '../models/login.model';
 import {Router} from '@angular/router';
 import {MessageActions} from '../../../core/message.actions';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../../store/app.state';
+import {AppState} from '../../../store/state/app.state';
 import * as UserActions from '../../../store/actions/users.actions';
 import {AuthenticationService} from '../../../core/services/authentication.service';
 import {User} from '../models/User';
@@ -12,7 +12,7 @@ import {User} from '../models/User';
 @Component({
   selector: 'login-page',
   templateUrl: './login.component.html',
-  styleUrls: ['../authorization.form.css']
+  styleUrls: ['../../shared/forms.css']
 })
 
 export class LoginComponent {
@@ -21,7 +21,6 @@ export class LoginComponent {
 
   constructor(private router: Router,
               private message: MessageActions,
-              private store: Store<AppState>,
               private service: AuthenticationService
               ) {
   }
@@ -29,7 +28,6 @@ export class LoginComponent {
   onSubmit() {
     this.service.login(this.user).subscribe(user => {
       if(user) {
-        this.store.dispatch(new UserActions.LoginUser(user as User));
         this.router.navigateByUrl('/');
         this.message.success('Login successful !');
       }

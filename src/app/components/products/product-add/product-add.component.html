@@ -1,0 +1,113 @@
+<banner></banner>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 contact_col">
+        <div class="get_in_touch">
+          <div class="section_title">Adding a product !</div>
+          <div class="section_subtitle">Please follow the form below: </div>
+          <div class="contact_form_container">
+            <div class="ng-invalid" *ngIf="productAdd.invalid && productAdd.touched">All field are required !</div>
+            <form #productAdd="ngForm" (ngSubmit)="onSubmit()" id="contact_form" class="contact_form">
+              <div class="form-group">
+                <label for='images' class="file-upload form-control">Click here to upload images: </label>
+                <input id='images' type="file" multiple (change)="fileUploaded($event)" class="form-control" required/>
+                <div [hidden]="files.length === 0">
+                  <p>{{files.length}} files added !</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="category">Category: </label>
+                <select id="category"
+                        class="form-control"
+                        name="category"
+                        required
+                        #category="ngModel"
+                        [(ngModel)]="product.category">
+                  <option *ngFor="let item of categories | async" value="{{item._id}}">{{item.name}}</option>
+                </select>
+                <div [hidden]="category.valid || category.untouched" class="alert alert-danger">
+                  Please choose category !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Product Name: </label>
+                <input type="text" class="form-control" id="name"
+                       required
+                       name="name"
+                       #name="ngModel"
+                       [pattern]="'^[a-zA-z0-9 ]+$'"
+                       [(ngModel)]="product.name">
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Product name must contain only letters and digits !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="description">Description: </label>
+                <textarea class="form-control" id="description"
+                       required
+                       name="description"
+                       [pattern]="'^[a-zA-z0-9 ]+$'"
+                       minlength="20"
+                       maxlength="200"
+                       #description="ngModel"
+                          [(ngModel)]="product.description">
+                </textarea>
+                <div [hidden]="description.valid || description.pristine" class="alert alert-danger">
+                  Description should be between 20 and 200 symbols and should contain only letters and digits !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="details">Details: </label>
+                <textarea class="form-control" id="details"
+                          required
+                          name="details"
+                          [pattern]="'^[a-zA-z0-9 ]+$'"
+                          minlength="10"
+                          maxlength="200"
+                          #details="ngModel"
+                          [(ngModel)]="product.details">
+                </textarea>
+                <div [hidden]="details.valid || details.pristine" class="alert alert-danger">
+                  Details should be between 10 and 200 symbols and should contain only letters and digits !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="price">Price: </label>
+                <input type="number" class="form-control" id="price"
+                       required
+                       name="price"
+                       #price="ngModel"
+                       [min]="1"
+                       [pattern]="'^[0-9.]+$'"
+                       [(ngModel)]="product.price">
+                <div [hidden]="price.valid || price.pristine" class="alert alert-danger">
+                  Price should contain only digits and should be grater than 0. Separator <strong>.</strong> !
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="quantity">Quantity: </label>
+                <input type="number" class="form-control" id="quantity"
+                       required
+                       name="quantity"
+                       #quantity="ngModel"
+                       [min]="1"
+                       [pattern]="'^[0-9]+$'"
+                       [(ngModel)]="product.quantity">
+                <div [hidden]="quantity.valid || quantity.pristine" class="alert alert-danger">
+                  Quantity should contain only digits and should be grater than 0!
+                </div>
+              </div>
+
+              <button type="submit" class="button contact_button"
+                      [disabled]="!productAdd.valid"><span>Add</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,7 +1,13 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {LoginModel} from '../../components/users/models/login.model';
 import {RegisterModel} from '../../components/users/models/register.model';
+import {map} from 'rxjs/internal/operators';
+import * as UserActions from '../../store/actions/users.actions';
+import {User} from '../../components/users/models/User';
+import {AppState} from '../../store/state/app.state';
+import {Store} from '@ngrx/store';
+import {LoginUser, LogoutUser, RegisterUser} from '../../store/actions/users.actions';
 
 const appKey = "kid_BJW3zX1Hm";
 const registerUrl = `https://baas.kinvey.com/user/${appKey}`;
@@ -11,17 +17,25 @@ const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   login(user: LoginModel){
-    return this.http.post(loginUrl, JSON.stringify(user))
+    return this.http.post(loginUrl, JSON.stringify(user)).pipe(map(data => {
+      this.store.dispatch(new LoginUser(data as User));
+      return data as User;
+    }))
   }
 
   register(user: RegisterModel){
-    return this.http.post(registerUrl, JSON.stringify(user))
+    return this.http.post(registerUrl, JSON.stringify(user)).pipe(map(data => {
+      this.store.dispatch(new RegisterUser(data as User));
+      return data as User;
+    }))
   }
 
   logout(){
-    return this.http.post(logoutUrl, {})
+    return this.http.post(logoutUrl, {}).pipe(map(data => {
+      this.store.dispatch(new LogoutUser())
+    }))
   }
 }

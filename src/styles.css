@@ -121,10 +121,16 @@ h6::selection
 {
 
 }
-.form-control
+.ng-valid
 {
-  color: #db5246;
+  color: #02db3b;
 }
+
+.ng-invalid
+{
+  color: #a02f05;
+}
+
 section
 {
   display: block;

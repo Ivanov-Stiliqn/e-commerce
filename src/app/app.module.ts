@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {RoutesModule} from './core/routes.module';
 import {UsersModule} from './components/users/users.module';
-import {HomeComponent} from './components/home/home.component';
+import {HomeComponent} from './components/home/landing-page/home.component';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,13 +18,21 @@ import {AppStoreModule} from './store/store.module';
 import {SliderComponent} from './components/home/slider/slider.component';
 import {TokenInterceptor} from './core/interceptors/token.interceptor';
 import {CanActivateRouteGuard} from './core/guards/auth.guard';
+import {AngularFileUploaderModule} from 'angular-file-uploader';
+import {Ng2CloudinaryModule} from 'ng2-cloudinary';
+import { UpperAdsComponent } from './components/home/static/upper-ads/upper-ads.component';
+import { BottomAdsComponent } from './components/home/static/bottom-ads/bottom-ads.component';
+import {ProductsService} from './core/services/products.service';
+import {CategoriesService} from './core/services/categories.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SliderComponent
+    SliderComponent,
+    UpperAdsComponent,
+    BottomAdsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,8 @@ import {CanActivateRouteGuard} from './core/guards/auth.guard';
     BrowserAnimationsModule,
     RadarSpinnerModule,
     ToastrModule.forRoot(),
+    AngularFileUploaderModule,
+    Ng2CloudinaryModule,
     AppStoreModule,
     SharedModule,
     UsersModule,

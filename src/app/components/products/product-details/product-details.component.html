@@ -1,0 +1,111 @@
+<div [hidden]="!displaySpinner" class="spinner">
+  <app-radar-spinner
+    [animationDuration]="1000"
+    [size]="200"
+    [color]="'#666666'">
+  </app-radar-spinner>
+</div>
+<div [hidden]="displaySpinner">
+  <div class="product_details">
+    <div class="container">
+      <div class="row details_row">
+
+        <!-- Product Image -->
+        <div class="col-lg-6">
+          <div class="details_image">
+            <div class="details_image_large"><img src="{{currentImage}}" alt=""/></div>
+            <div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
+            <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
+              <div *ngFor="let image of product.images" (click)="imageClicked(image)"
+                   [class]="currentImage === image ? 'details_image_thumbnail active' : 'details_image_thumbnail'">
+                <img src="{{image}}" alt=""></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Content -->
+        <div class="col-lg-6">
+          <div class="details_content">
+            <div class="details_name">{{product.name}}</div>
+            <div *ngIf="product.discount" class="details_discount">${{product.discount}}</div>
+            <div class="details_price">${{product.price}}</div>
+
+            <!-- In Stock -->
+            <div class="in_stock_container">
+              <div class="availability">Availability:</div>
+              <span class="in_stock" *ngIf="product.quantity > 0">In Stock</span>
+              <span class="out_of_stock" *ngIf="product.quantity === 0">Out Of Stock</span>
+            </div>
+            <div class="details_text">
+              <p>{{product.details}}</p>
+            </div>
+
+            <!-- Product Quantity -->
+            <div [hidden]="quantity <= product.quantity" class="out_of_stock_qty">There are no enough products in stock
+              !
+            </div>
+            <div class="product_quantity_container" [hidden]="product.quantity === 0">
+              <div class="product_quantity clearfix">
+                <span>Qty</span>
+                <input id="quantity_input" type="text" pattern="[0-9]*" value="{{quantity}}">
+                <div class="quantity_buttons">
+                  <div id="quantity_inc_button" class="quantity_inc quantity_control" (click)="incrementQty($event)"><i
+                    class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                  <div id="quantity_dec_button" class="quantity_dec quantity_control" (click)="decrementQty($event)"><i
+                    class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                </div>
+              </div>
+              <div class="button cart_button" [hidden]="quantity > product.quantity"><a href="#">Add to cart</a></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row description_row">
+        <div class="col">
+          <div class="description_title_container">
+            <div class="description_title">Description</div>
+            <div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
+          </div>
+          <div class="description_text">
+            <p>{{product.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products -->
+
+  <div class="products">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <div class="products_title">Related Products</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+
+          <div class="product_grid">
+
+            <!-- Product -->
+            <div class="product" *ngFor="let item of otherProducts">
+              <div class="product_image"><img src="{{item.image}}" alt=""></div>
+              <div class="product_extra product_sale" *ngIf="item.discount"><a href="#">Sale</a></div>
+              <div class="product_content">
+                <div class="product_title"><a routerLink="/products/product-details/{{item._id}}">{{item.name}}</a>
+                </div>
+                <div class="product_price">${{item.price}}</div>
+              </div>
+            </div>
+
+            <!-- Product -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

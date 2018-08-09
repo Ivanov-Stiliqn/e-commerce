@@ -6,7 +6,7 @@ import {productsReducer} from './reducers/products.reducer';
 
 @NgModule({
   imports: [StoreModule.forRoot({
-    currentUser: usersReducer,
+    auth: usersReducer,
     categories: categoriesReducer,
     products: productsReducer
   })],

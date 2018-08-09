@@ -6,11 +6,12 @@ import {RegisterComponent} from './register-page/register.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from '../../core/services/authentication.service';
-import {BannerComponent} from './banner/banner.component';
+import {BannerComponent} from '../shared/banner/banner.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, BannerComponent],
-  imports: [CommonModule, RoutesModule, FormsModule, HttpClientModule],
+  declarations: [LoginComponent, RegisterComponent],
+  imports: [CommonModule, RoutesModule, FormsModule, HttpClientModule, SharedModule],
   exports: [LoginComponent, RegisterComponent],
   providers: [AuthenticationService]
 })
