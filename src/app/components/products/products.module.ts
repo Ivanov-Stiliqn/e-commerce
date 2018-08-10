@@ -13,6 +13,8 @@ import {SharedModule} from '../shared/shared.module';
 import {ProductsRoutingModule} from './products-routing.module';
 import {TokenInterceptor} from '../../core/interceptors/token.interceptor';
 import {RadarSpinnerModule} from 'angular-epic-spinners';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CartService} from '../../core/services/cart.service';
 
 @NgModule({
   declarations: [ProductsPageComponent, ProductsBannerComponent, ProductDetailsComponent, ProductAddComponent],
@@ -26,7 +28,7 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
     SharedModule,
     RadarSpinnerModule],
   exports: [],
-  providers: [ProductsService, {
+  providers: [ProductsService, CartService,{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

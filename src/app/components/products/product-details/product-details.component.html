@@ -55,7 +55,7 @@
                     class="fa fa-chevron-down" aria-hidden="true"></i></div>
                 </div>
               </div>
-              <div class="button cart_button" [hidden]="quantity > product.quantity"><a href="#">Add to cart</a></div>
+              <div class="button cart_button" [hidden]="quantity > product.quantity"><a href="#" (click)="addToCart($event)">Add to cart</a></div>
             </div>
 
           </div>

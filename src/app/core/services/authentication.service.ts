@@ -7,12 +7,13 @@ import * as UserActions from '../../store/actions/users.actions';
 import {User} from '../../components/users/models/User';
 import {AppState} from '../../store/state/app.state';
 import {Store} from '@ngrx/store';
-import {LoginUser, LogoutUser, RegisterUser} from '../../store/actions/users.actions';
+import {LoginUser, LogoutUser, RegisterUser, SeedUser} from '../../store/actions/users.actions';
 
 const appKey = "kid_BJW3zX1Hm";
 const registerUrl = `https://baas.kinvey.com/user/${appKey}`;
 const loginUrl = `https://baas.kinvey.com/user/${appKey}/login`;
 const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
+const getUserUrl = `https://baas.kinvey.com/user/${appKey}/`;
 
 @Injectable()
 export class AuthenticationService {
@@ -37,5 +38,14 @@ export class AuthenticationService {
     return this.http.post(logoutUrl, {}).pipe(map(data => {
       this.store.dispatch(new LogoutUser())
     }))
+  }
+
+  seedUser(){
+    let id = localStorage.getItem('id');
+    if(id !== null) {
+      this.http.get(getUserUrl + id).subscribe(data => {
+        this.store.dispatch(new SeedUser(data as User));
+      });
+    }
   }
 }

@@ -17,7 +17,7 @@
             <div class="product_grid">
               <!-- Product -->
 
-              <div class="product" *ngFor="let product of products$ | async">
+              <div class="product" *ngFor="let product of products$ | async" [@listProducts]>
                 <div class="product_image"><img src="{{product.image}}" alt=""></div>
                 <div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
                 <div class="product_content">

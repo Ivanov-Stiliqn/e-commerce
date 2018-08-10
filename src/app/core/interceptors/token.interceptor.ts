@@ -22,7 +22,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req);
     if (req.url.endsWith('login') || req.url.endsWith(appKey)) {
       req = req.clone({
         setHeaders: {
@@ -61,6 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(tap((event : HttpEvent<any>) => {
       if (event instanceof HttpResponse && req.url.endsWith('login')) {
           localStorage.setItem('authtoken', event.body._kmd.authtoken);
+          localStorage.setItem('id', event.body._id);
       }
     }, (err : any) => {
       if (err instanceof HttpErrorResponse) {

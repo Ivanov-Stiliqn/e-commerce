@@ -6,5 +6,5 @@ export interface User {
   lastName: string,
   email: string,
   phone: string,
-  isAdmin: boolean
+  isAdmin: string
 }

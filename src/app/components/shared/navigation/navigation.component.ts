@@ -6,8 +6,6 @@ import {Observable} from 'rxjs';
 import {User} from '../../users/models/User';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
-import * as UserActions from '../../../store/actions/users.actions';
-import * as CategoriesActions from '../../../store/actions/categories.actions';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {select} from '@ngrx/store';
 import {AuthenticationService} from '../../../core/services/authentication.service';
@@ -19,8 +17,9 @@ import {AuthenticationService} from '../../../core/services/authentication.servi
 })
 
 export class NavigationComponent {
-  isLogged: boolean;
+  user: User;
   categories: Observable<Category[]>;
+  productsInCart: number;
 
   constructor(private router: Router,
               private message: MessageActions,
@@ -28,14 +27,18 @@ export class NavigationComponent {
               private store: Store<AppState>,
               private authService: AuthenticationService) {}
 
-  ngOnInit(){
-   this.service.renderCategories().subscribe(() => {
-        this.categories = this.store.pipe(select(state => state.categories.all));
+  ngOnInit() {
+    this.service.renderCategories().subscribe(() => {
+      this.categories = this.store.pipe(select(state => state.categories.all));
     });
 
-   this.store.pipe(select(state => state.auth.current)).subscribe(user => {
-     this.isLogged = user !== null;
-   })
+    this.store.pipe(select(state => state.cart.products)).subscribe(products => {
+      this.productsInCart = products.length;
+    });
+
+    this.store.pipe(select(state => state.auth.current)).subscribe(user => {
+      this.user = user;
+    });
   }
 
   logout(event) {

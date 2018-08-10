@@ -5,12 +5,22 @@ import {AppState} from '../../../store/state/app.state';
 import {ProductsService} from '../../../core/services/products.service';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute} from '@angular/router';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
-  styleUrls: ['./products-page.component.css']
+  styleUrls: ['./products-page.component.css'],
+  animations: [
+    trigger('listProducts', [
+    transition('void => *', [
+      style({
+        opacity: 0,
+        transform: 'translateX(-100px)'
+      }),
+      animate(300)
+    ]),])]
 })
 export class ProductsPageComponent implements OnInit {
   products$: Observable<Product[]>;
@@ -36,7 +46,7 @@ export class ProductsPageComponent implements OnInit {
 
 
      this.products$ = this.productsService.renderProductsByCategory(this.id);
-   })
+   });
 
   }
 }

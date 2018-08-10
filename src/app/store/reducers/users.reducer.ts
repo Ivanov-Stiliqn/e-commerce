@@ -6,13 +6,14 @@ export function usersReducer (state: UsersState = USERS_INITIAL_STATE, action: U
   switch (action.type){
     case UserActions.USER_LOGIN:
     case UserActions.USER_REGISTER:
+    case UserActions.SEED_USER:
       return Object.assign({}, state, {
         current: action.payload
       });
     case UserActions.USER_LOGOUT:
       localStorage.clear();
       return Object.assign({}, state, {
-      current: null
+      current: {} as User
     });
     default:
       return state;

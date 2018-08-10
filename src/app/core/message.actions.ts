@@ -6,7 +6,7 @@ export class MessageActions {
   constructor(private toastr: ToastrService) {}
 
   success(message){
-    this.toastr.success(message);
+    this.toastr.success(message, 'Success');
   }
 
   warning(message){
@@ -14,6 +14,6 @@ export class MessageActions {
   }
 
   error(message) {
-    this.toastr.error(message);
+    this.toastr.error(message, 'Error');
   }
 }

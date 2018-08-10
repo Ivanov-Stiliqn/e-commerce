@@ -22,9 +22,8 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {Ng2CloudinaryModule} from 'ng2-cloudinary';
 import { UpperAdsComponent } from './components/home/static/upper-ads/upper-ads.component';
 import { BottomAdsComponent } from './components/home/static/bottom-ads/bottom-ads.component';
-import {ProductsService} from './core/services/products.service';
-import {CategoriesService} from './core/services/categories.service';
-
+import {CartModule} from './components/cart/cart.module';
+import {AuthenticationService} from './core/services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -41,18 +40,26 @@ import {CategoriesService} from './core/services/categories.service';
     HttpClientModule,
     BrowserAnimationsModule,
     RadarSpinnerModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        enableHtml: true,
+        closeButton: true,
+        preventDuplicates: true,
+      }
+    ),
     AngularFileUploaderModule,
     Ng2CloudinaryModule,
     AppStoreModule,
     SharedModule,
     UsersModule,
     ProductsModule,
-    CategoriesModule
+    CategoriesModule,
+    CartModule
   ],
   providers: [
     ToastrService,
     MessageActions,
+    AuthenticationService,
     CanActivateRouteGuard, {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

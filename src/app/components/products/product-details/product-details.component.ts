@@ -3,8 +3,10 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
 import {Product} from '../models/Product';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
 import {ProductsService} from '../../../core/services/products.service';
+import {CartProduct} from '../../cart/models/cart-product.model';
+import {CartService} from '../../../core/services/cart.service';
+import {MessageActions} from '../../../core/message.actions';
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +23,9 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
-              private service: ProductsService) {
+              private service: ProductsService,
+              private cartService: CartService,
+              private message: MessageActions) {
   }
 
   ngOnInit() {
@@ -52,6 +56,25 @@ export class ProductDetailsComponent implements OnInit {
     if(this.quantity !== 0){
       this.quantity -= 1;
     }
+  }
+
+  addToCart(e){
+    e.preventDefault();
+
+    let productForCart = new CartProduct(
+      this.product._id,
+      this.product.name,
+      this.product.image,
+      this.product.price,
+      this.quantity
+    );
+
+    if(this.product.discount !== undefined){
+      productForCart.price = this.product.discount;
+    }
+
+    this.cartService.addProduct(productForCart);
+    this.message.success('Product added to cart!');
   }
 
 }
