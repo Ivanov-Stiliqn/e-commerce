@@ -24,6 +24,7 @@ import { UpperAdsComponent } from './components/home/static/upper-ads/upper-ads.
 import { BottomAdsComponent } from './components/home/static/bottom-ads/bottom-ads.component';
 import {CartModule} from './components/cart/cart.module';
 import {AuthenticationService} from './core/services/authentication.service';
+import {AdminGuard} from './core/guards/admin.guard';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {AuthenticationService} from './core/services/authentication.service';
     ToastrService,
     MessageActions,
     AuthenticationService,
-    CanActivateRouteGuard, {
+    CanActivateRouteGuard,
+    AdminGuard, {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true

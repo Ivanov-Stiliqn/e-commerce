@@ -27,7 +27,7 @@ export class ProductsService {
       });
     }
 
-    return this.http.get(url).pipe(map(data => {
+    return this.http.get(url + '?sort={"_kmd.ect": -1}').pipe(map(data => {
       if (data) {
         let products = data as Product[];
         this.store.dispatch(new RenderProducts(products));
@@ -140,6 +140,29 @@ export class ProductsService {
           return editedProduct;
         }
       }));
+  }
+
+  updateProductsQuantity(){
+    let products = JSON.parse(localStorage.getItem('cart'));
+    let productsIds = products.map(p => '"' + p._id + '"');
+    let observables = [];
+
+    this.http.get(url + `?query={"_id": {"$in": [${productsIds}]}}`).subscribe(data => {
+      for (let product of data as Product[]) {
+        product.quantity -= products.filter(p => p._id === product._id)[0].quantity;
+        if(product.quantity < 0){
+          throw new Error('Sorry you are too late, somebody took the last one !');
+        }
+
+        observables.push(this.http.put(url + `/${product._id}`, product));
+      }
+
+      forkJoin(...observables).subscribe(data => {
+        for (let product of data as Product[]) {
+          this.store.dispatch(new EditProduct(product));
+        }
+      })
+    })
   }
 
 }

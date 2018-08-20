@@ -11,6 +11,7 @@ import {CategoriesRoutingModule} from './categories-routing.module';
 import {TokenInterceptor} from '../../core/interceptors/token.interceptor';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
+import {AdminGuard} from '../../core/guards/admin.guard';
 
 @NgModule({
   declarations: [CategoryAddComponent, CategoriesPageComponent, CategoryEditComponent],
@@ -23,7 +24,7 @@ import { CategoryEditComponent } from './category-edit/category-edit.component';
     Ng2CloudinaryModule,
     SharedModule],
   exports: [],
-  providers: [CategoriesService, {
+  providers: [CategoriesService, AdminGuard,  {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

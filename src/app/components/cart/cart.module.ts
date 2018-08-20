@@ -9,6 +9,8 @@ import {CartRoutingModule} from './cart-routing.module';
 import {CartService} from '../../core/services/cart.service';
 import {CartComponent} from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import {CanActivateRouteGuard} from '../../core/guards/auth.guard';
+import {MailService} from '../../core/services/mail.service';
 
 @NgModule({
   declarations: [CartComponent, CheckoutComponent],
@@ -20,7 +22,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     SharedModule,
     RadarSpinnerModule],
   exports: [],
-  providers: [CartService, {
+  providers: [CartService, CanActivateRouteGuard, MailService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

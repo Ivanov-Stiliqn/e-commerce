@@ -42,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
         let product = products.filter(p => p._id === this.id)[0];
         this.currentImage = product.images[0];
         this.product = product;
-        this.otherProducts = products.filter(p => p._id !== this.id).slice(0 , 4);
+        this.otherProducts = products.filter(p => p._id !== this.id && p.category === this.product.category).slice(0 , 4);
         this.displaySpinner = false;
       });
     });
@@ -114,6 +114,9 @@ export class ProductDetailsComponent implements OnInit {
       comment: this.reviewText
     };
 
+    if(this.product.reviews === undefined){
+      this.product.reviews = [];
+    }
     this.product.reviews.push(review);
     this.service.addReview(this.product).subscribe(() => {
       this.message.success('Review added !');

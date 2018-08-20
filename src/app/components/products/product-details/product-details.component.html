@@ -79,6 +79,7 @@
           <div class="block-2 wrap pad-2" [hidden]="descriptionClicked">
             <div class="box-2">
               <div class="comments">
+                <div *ngIf="product.reviews !== 'undefined'"><h3>No reviews, yet !</h3></div>
                 <div *ngFor="let review of product.reviews">
                   <div class="comment">
                     <div>“{{review.comment}}”</div>
@@ -87,17 +88,19 @@
                   <a>{{review.username}}</a><br>
                 </div>
               </div>
-              <textarea
-                     class="form-control review"
-                     placeholder="Please add your opinion here !"
-                     required="required"
-                     #review="ngModel"
-                     [(ngModel)]="reviewText"
-                     name="review">
-              </textarea>
-              <a class="add_comment_btn" (click)="addReview()">
-                <span>Add Review</span>
-              </a>
+              <div *ngIf="user.username">
+                <textarea
+                       class="form-control review"
+                       placeholder="Please add your opinion here !"
+                       required="required"
+                       #review="ngModel"
+                       [(ngModel)]="reviewText"
+                       name="review">
+                </textarea>
+                <a class="add_comment_btn" (click)="addReview()">
+                  <span>Add Review</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -107,7 +110,7 @@
 
   <!-- Products -->
 
-  <div class="products">
+  <div class="products" *ngIf="otherProducts && otherProducts.length > 0">
     <div class="container">
       <div class="row">
         <div class="col text-center">

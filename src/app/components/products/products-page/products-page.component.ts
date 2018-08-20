@@ -29,7 +29,7 @@ export class ProductsPageComponent implements OnInit {
   id: string;
   displaySpinner: boolean = true;
   currentPage = 1;
-  pageSize = 4;
+  pageSize = 8;
 
   constructor(private route: ActivatedRoute,
               private store: Store<AppState>,

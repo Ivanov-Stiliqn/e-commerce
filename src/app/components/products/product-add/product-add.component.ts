@@ -32,6 +32,11 @@ export class ProductAddComponent {
   }
 
   onSubmit() {
+    if(this.files.length === 0){
+      this.message.warning('Please add at least one image !');
+      return;
+    }
+
     this.message.warning('Loading....');
     this.service.uploadImages(this.files).subscribe(data => {
       data.forEach(o => this.product.images.push(o.url));

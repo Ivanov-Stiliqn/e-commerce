@@ -20,7 +20,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.productsService.renderProducts().subscribe((data) => {
-      this.products = data;
+      this.products = data.slice(0, 8);
       this.displaySpinner = false;
     });
   }

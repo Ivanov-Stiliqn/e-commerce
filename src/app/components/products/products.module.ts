@@ -19,6 +19,8 @@ import {CustomFormsModule} from 'ng2-validation';
 import {AuthenticationService} from '../../core/services/authentication.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ProductsSearchComponent} from './products-search/products-search.component';
+import {AdminGuard} from '../../core/guards/admin.guard';
+import {CanActivateRouteGuard} from '../../core/guards/auth.guard';
 
 @NgModule({
   declarations: [ProductsPageComponent, ProductsBannerComponent, ProductDetailsComponent, ProductAddComponent, ProductEditComponent, ProductsSearchComponent],
@@ -34,7 +36,7 @@ import {ProductsSearchComponent} from './products-search/products-search.compone
     CustomFormsModule,
     NgxPaginationModule],
   exports: [],
-  providers: [ProductsService, CartService, {
+  providers: [ProductsService, CartService, AdminGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
