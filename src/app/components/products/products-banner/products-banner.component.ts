@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ProductsBannerComponent {
   @Input() image;
+  @Input() name;
 }

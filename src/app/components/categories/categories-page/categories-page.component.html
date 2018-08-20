@@ -1,0 +1,34 @@
+<div>
+  <banner></banner>
+  <div>
+    <!-- Categories -->
+    <div class="products">
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+
+            <div class="product_grid">
+              <!-- Product -->
+
+              <div class="product" *ngFor="let category of categories$ | async" [@listCategories]>
+                <div class="product_image"><img src="{{category.image}}" alt=""></div>
+                <div class="product_content">
+                  <div class="product_title"><a
+                    routerLink="/products/category/{{category._id}}">{{category.name}}</a></div>
+                  <div class="controls">
+                    <div class="button edit"><a routerLink="/categories/category-edit/{{category._id}}">Edit</a></div>
+                    <div class="button delete"><a (click)="deleteCategory(category._id)">Delete</a></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-icons></app-icons>
+    </div>
+  </div>
+</div>

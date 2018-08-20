@@ -13,11 +13,15 @@ import {SharedModule} from '../shared/shared.module';
 import {ProductsRoutingModule} from './products-routing.module';
 import {TokenInterceptor} from '../../core/interceptors/token.interceptor';
 import {RadarSpinnerModule} from 'angular-epic-spinners';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CartService} from '../../core/services/cart.service';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import {CustomFormsModule} from 'ng2-validation';
+import {AuthenticationService} from '../../core/services/authentication.service';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {ProductsSearchComponent} from './products-search/products-search.component';
 
 @NgModule({
-  declarations: [ProductsPageComponent, ProductsBannerComponent, ProductDetailsComponent, ProductAddComponent],
+  declarations: [ProductsPageComponent, ProductsBannerComponent, ProductDetailsComponent, ProductAddComponent, ProductEditComponent, ProductsSearchComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -26,9 +30,11 @@ import {CartService} from '../../core/services/cart.service';
     AngularFileUploaderModule,
     Ng2CloudinaryModule,
     SharedModule,
-    RadarSpinnerModule],
+    RadarSpinnerModule,
+    CustomFormsModule,
+    NgxPaginationModule],
   exports: [],
-  providers: [ProductsService, CartService,{
+  providers: [ProductsService, CartService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

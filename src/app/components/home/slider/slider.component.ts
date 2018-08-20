@@ -48,9 +48,9 @@ import {
 export class SliderComponent {
   isHome: boolean;
 
-  public _images: string[] = ['http://trademarkradio.nl/wp-content/uploads/2014/03/Headphones-Cool-HD-Wallpapers.jpg',
-    '../../../assets/images/home_slider_1.jpg',
-    'http://1.bp.blogspot.com/-1gqsZ4NVldk/Tv6rIpYiiVI/AAAAAAAABBc/aB95EJ8M-HA/s1600/Laptop-Wallpapers-01.jpg'
+  public _images: string[] = ['../../../assets/images/home_slider_1.jpg',
+    '../../../assets/images/home_slider_2.jpg',
+    '../../../assets/images/home_slider_3.jpg'
   ];
   selectedIndex: number = 0;
   intervalIndex;

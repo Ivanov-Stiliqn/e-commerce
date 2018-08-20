@@ -35,6 +35,10 @@
               <div class="availability">Availability:</div>
               <span class="in_stock" *ngIf="product.quantity > 0">In Stock</span>
               <span class="out_of_stock" *ngIf="product.quantity === 0">Out Of Stock</span>
+              <div class="adminBtns" *ngIf="user.isAdmin === 'true'">
+                <div class="button edit"><a routerLink="/products/product-edit/{{product._id}}">Edit</a></div>
+                <div class="button delete"><a (click)="deleteProduct()">Delete</a></div>
+              </div>
             </div>
             <div class="details_text">
               <p>{{product.details}}</p>
@@ -55,7 +59,7 @@
                     class="fa fa-chevron-down" aria-hidden="true"></i></div>
                 </div>
               </div>
-              <div class="button cart_button" [hidden]="quantity > product.quantity"><a href="#" (click)="addToCart($event)">Add to cart</a></div>
+              <div class="button cart_button" [hidden]="quantity > product.quantity || user.isAdmin === 'true'"><a href="#" (click)="addToCart($event)">Add to cart</a></div>
             </div>
 
           </div>
@@ -65,11 +69,36 @@
       <div class="row description_row">
         <div class="col">
           <div class="description_title_container">
-            <div class="description_title">Description</div>
-            <div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div>
+            <div [class]="descriptionClicked ? 'description_title active' : 'description_title'" (click)="changeParams()"><a>Description</a></div>
+            <div [class]="!descriptionClicked ? 'reviews_title active' :'reviews_title'" (click)="changeParams()" >
+              <a>Reviews <span *ngIf="product.reviews">({{product.reviews.length}})</span></a></div>
           </div>
-          <div class="description_text">
+          <div class="description_text" [hidden]="!descriptionClicked">
             <p>{{product.description}}</p>
+          </div>
+          <div class="block-2 wrap pad-2" [hidden]="descriptionClicked">
+            <div class="box-2">
+              <div class="comments">
+                <div *ngFor="let review of product.reviews">
+                  <div class="comment">
+                    <div>“{{review.comment}}”</div>
+                    <div class="comments-corner"></div>
+                  </div>
+                  <a>{{review.username}}</a><br>
+                </div>
+              </div>
+              <textarea
+                     class="form-control review"
+                     placeholder="Please add your opinion here !"
+                     required="required"
+                     #review="ngModel"
+                     [(ngModel)]="reviewText"
+                     name="review">
+              </textarea>
+              <a class="add_comment_btn" (click)="addReview()">
+                <span>Add Review</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

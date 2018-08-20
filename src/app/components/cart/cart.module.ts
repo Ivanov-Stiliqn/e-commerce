@@ -8,9 +8,10 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
 import {CartRoutingModule} from './cart-routing.module';
 import {CartService} from '../../core/services/cart.service';
 import {CartComponent} from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
-  declarations: [CartComponent],
+  declarations: [CartComponent, CheckoutComponent],
   imports: [
     CommonModule,
     CartRoutingModule,

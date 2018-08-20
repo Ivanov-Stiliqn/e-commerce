@@ -60,4 +60,20 @@ export class CartService {
     })
   }
 
+  sendEmail() {
+    let data = {
+      service_id: 'gmail',
+      template_id: 'template_saP5lbUD',
+      user_id: 'user_2lXQgYx3hPunCXiOT2IIf',
+      template_params: {
+        from_name: 'Test',
+        to_name: 'Test',
+        message_html: 'testing email sending',
+        to_email: 'stiliyanIvanov@icloud.com'
+      },
+    };
+
+    return this.http.post('https://api.emailjs.com/api/v1.0/email/send', data);
+  }
+
 }

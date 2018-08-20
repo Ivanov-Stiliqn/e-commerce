@@ -9,9 +9,11 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {SharedModule} from '../shared/shared.module';
 import {CategoriesRoutingModule} from './categories-routing.module';
 import {TokenInterceptor} from '../../core/interceptors/token.interceptor';
+import { CategoriesPageComponent } from './categories-page/categories-page.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
 
 @NgModule({
-  declarations: [CategoryAddComponent],
+  declarations: [CategoryAddComponent, CategoriesPageComponent, CategoryEditComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,

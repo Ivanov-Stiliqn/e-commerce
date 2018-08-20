@@ -6,7 +6,7 @@
   </app-radar-spinner>
 </div>
 <div [hidden]="displaySpinner">
-  <products-banner [image]="image"></products-banner>
+  <products-banner [image]="category.image" [name]="category.name"></products-banner>
   <div>
     <!-- Products -->
     <div class="products">
@@ -17,7 +17,10 @@
             <div class="product_grid">
               <!-- Product -->
 
-              <div class="product" *ngFor="let product of products$ | async" [@listProducts]>
+              <div class="product" *ngFor="let product of products$ | async | paginate: {
+              id: 'allFurnitures',
+              itemsPerPage: pageSize,
+              currentPage: currentPage}" [@listProducts]>
                 <div class="product_image"><img src="{{product.image}}" alt=""></div>
                 <div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
                 <div class="product_content">
@@ -30,6 +33,18 @@
             </div>
           </div>
         </div>
+        <pagination-controls
+          id="allFurnitures"
+          (pageChange)="currentPage = $event"
+          [maxSize]="9"
+          [directionLinks]="true"
+          [autoHide]="true"
+          [previousLabel]="'Previous'"
+          [nextLabel]="'Next'"
+          [screenReaderPaginationLabel]="'Pagination'"
+          [screenReaderPageLabel]="'page'"
+          [screenReaderCurrentLabel]="'You are on page'">
+        </pagination-controls>
       </div>
 
       <app-icons></app-icons>

@@ -293,33 +293,34 @@
 {
   margin-top: 91px;
 }
-.description_title
+.description_title, .reviews_title
 {
-  display: inline-block;
-  font-size: 24px;
-  font-weight: 500;
-  color: #1b1b1b;
-}
-.reviews_title
-{
-  display: inline-block;
-  margin-left: 41px;
-}
-.reviews_title a
-{
-  font-size: 24px;
-  font-weight: 500;
   color: #6c6a74;
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
 }
-.reviews_title a:hover
+
+.description_title a:hover, .reviews_title a:hover
 {
   color: #1b1b1b;
 }
+
+.reviews_title
+{
+  margin-left: 41px;
+}
+
+.active {
+  color: #1b1b1b;
+}
+
 .description_text
 {
   margin-top: 44px;
@@ -438,8 +439,241 @@
   margin-top: 150px;
 }
 
+.block-2 {
+  margin-top: 50px;
+}
+
 .spinner {
   text-align: center;
   width: 20%;
   margin: 200px auto;
+}
+
+
+.button
+{
+  background: none;
+  text-align: center;
+  border: solid 2px #1b1b1b;
+  overflow: hidden;
+  cursor: pointer;
+}
+.button a
+{
+  display: block;
+  position: relative;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 57px;
+  color: #1b1b1b;
+  background: none;
+  z-index: 1;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.button::after
+{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  background: #1b1b1b;
+  z-index: 0;
+  opacity: 0;
+  -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  -webkit-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+  transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+}
+.button:hover::after
+{
+  opacity: 1;
+  -webkit-transform: rotate3d(0, 0, 1, 0deg);
+  transform: rotate3d(0, 0, 1, 0deg);
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button_light
+{
+  border: solid 2px #FFFFFF;
+}
+.button_light::after
+{
+  background: #FFFFFF;
+}
+.button_light a
+{
+  color: #FFFFFF;
+}
+.button:hover a
+{
+  color: #FFFFFF;
+}
+.button_light:hover a
+{
+  color: #1b1b1b;
+}
+
+.adminBtns {
+  margin-top: 15px;
+}
+
+.delete {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.edit {
+  display: inline-block;
+}
+
+.reviews a {
+  padding: 15px;
+  margin: 15px;
+}
+
+.box-2>div>div {padding-bottom:20px;}
+.box-2>div>div>div {position:relative; border:#494949 1px solid; background:#000; padding:18px 20px 18px 29px; color:#9f9fa6; font-style:italic; text-transform:uppercase;}
+.box-2>div>div>div .comments-corner {position:absolute; bottom:-14px; left:29px; width:13px; height:14px; background:url(../../../../assets/images/comments-corner.png) 0 0 no-repeat; }
+.box-2>div>div> a {display:inline-block; background:url(../../../../assets/images/icon-1.png) 0 0 no-repeat; color:#9f9fa6; font-weight:bold; text-transform:uppercase; line-height:21px; padding-top:3px; padding-left:30px; margin-top:10px;}
+.box-2>div>div> a:hover {color:#fff;}
+
+.block-2 {background:#1c1c1c;}
+
+.pad-1 {padding:39px;}
+.pad-2 {padding:30px 40px 30px 40px;}
+.wrap {overflow:hidden; position:relative}
+
+.add_comment_btn {
+  display: inline-block;
+  text-align: center;
+  margin-top: 15px;
+
+  -webkit-border-radius: 10px;
+
+  -webkit-box-shadow:
+    0px 3px rgba(128,128,128,1), /* gradient effects */
+    0px 4px rgba(118,118,118,1),
+    0px 5px rgba(108,108,108,1),
+    0px 6px rgba(98,98,98,1),
+    0px 7px rgba(88,88,88,1),
+    0px 8px rgba(78,78,78,1),
+    0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
+
+  -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+}
+
+.add_comment_btn span {
+  background-color: #E8E8E8;
+
+  background-image:
+    /* gloss gradient */
+    -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(50%,rgba(255,255,255,0)),
+      color-stop(50%,rgba(255,255,255,0.3)),
+      color-stop(100%,rgba(255,255,255,0.2))),
+
+      /* dark outside gradient */
+    -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(0%,rgba(210,210,210,0.3)),
+      color-stop(20%,rgba(210,210,210,0)),
+      color-stop(80%,rgba(210,210,210,0)),
+      color-stop(100%,rgba(210,210,210,0.3))),
+
+      /* light inner gradient */
+    -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(0%,rgba(255,255,255,0)),
+      color-stop(20%,rgba(255,255,255,0.5)),
+      color-stop(80%,rgba(255,255,255,0.5)),
+      color-stop(100%,rgba(255,255,255,0))),
+
+      /* diagonal line pattern */
+    -webkit-gradient(
+      linear,
+      0% 100%,
+      100% 0%,
+      color-stop(0%,rgba(255,255,255,0)),
+      color-stop(40%,rgba(255,255,255,0)),
+      color-stop(40%,#D2D2D1),
+      color-stop(60%,#D2D2D1),
+      color-stop(60%,rgba(255,255,255,0)),
+      color-stop(100%,rgba(255,255,255,0)));
+
+  -webkit-box-shadow:
+    0px -1px #fff, /* top highlight */
+    0px 1px 1px #FFFFFF; /* bottom edge */
+
+  -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+
+  -webkit-border-radius: 10px;
+  -webkit-transition: -webkit-transform .1s ease-in-out;
+
+  display: inline-block;
+  padding: 4px 20px 4px 20px;
+
+  color: #3A474D;
+  text-transform: uppercase;
+  font-family: 'TradeGothicLTStd-BdCn20','PT Sans Narrow';
+  font-weight: 700;
+  font-size: 22px;
+
+  text-shadow: 0px 1px #fff, 0px -1px #262F33;
+}
+
+.add_comment_btn span:hover {
+  color: #ffffff;
+  text-shadow: 0px -1px #97A63A;
+  cursor: pointer;
+}
+
+.add_comment_btn:active {
+  -webkit-box-shadow:
+    0px 3px rgba(128,128,128,1),
+    0px 4px rgba(118,118,118,1),
+    0px 5px rgba(108,108,108,1),
+    0px 6px rgba(98,98,98,1),
+    0px 7px rgba(88,88,88,1),
+    0px 8px rgba(78,78,78,1),
+    0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
+}
+
+.add_comment_btn:active span{
+  -webkit-transform: translate(0, 5px); /* depth of button press */
+}
+
+.add_comment_btn span:after {
+  display: block;
+  width: 10px;
+  height: 10px;
+
+  font-family: 'Cabin';
+  font-weight: 700;
+  color: #AEBF3B;
+  text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+  font-size: 26px;
+}
+
+.review {
+  margin-top: 70px;
+}
+
+.comment > div {
+  width: 100% !important;
+  word-break: break-all;
 }

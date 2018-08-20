@@ -6,6 +6,7 @@ import {ProductsService} from '../../../core/services/products.service';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute} from '@angular/router';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {Category} from '../../categories/models/Category';
 
 
 @Component({
@@ -24,9 +25,11 @@ import {animate, style, transition, trigger} from '@angular/animations';
 })
 export class ProductsPageComponent implements OnInit {
   products$: Observable<Product[]>;
-  image: string;
+  category: Category;
   id: string;
   displaySpinner: boolean = true;
+  currentPage = 1;
+  pageSize = 4;
 
   constructor(private route: ActivatedRoute,
               private store: Store<AppState>,
@@ -39,7 +42,7 @@ export class ProductsPageComponent implements OnInit {
 
       this.store.pipe(select(state => state.categories.all)).subscribe(categories => {
         if(categories.length > 0){
-          this.image = categories.filter(c => c._id === this.id)[0].image;
+          this.category = categories.filter(c => c._id === this.id)[0];
           this.displaySpinner = false;
         }
       });

@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
 import {Product} from '../models/Product';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductsService} from '../../../core/services/products.service';
 import {CartProduct} from '../../cart/models/cart-product.model';
 import {CartService} from '../../../core/services/cart.service';
 import {MessageActions} from '../../../core/message.actions';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {map} from 'rxjs/internal/operators';
+import {User} from '../../users/models/User';
 
 @Component({
   selector: 'app-product-details',
@@ -20,12 +23,16 @@ export class ProductDetailsComponent implements OnInit {
   id: string;
   quantity: number = 1;
   displaySpinner: boolean = true;
+  user: User;
+  descriptionClicked: boolean = true;
+  reviewText: string = '';
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
               private service: ProductsService,
               private cartService: CartService,
-              private message: MessageActions) {
+              private message: MessageActions,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -39,6 +46,10 @@ export class ProductDetailsComponent implements OnInit {
         this.displaySpinner = false;
       });
     });
+
+    this.store.pipe(map(state => state.auth.current)).subscribe(user => {
+      this.user = user;
+    })
   }
 
   imageClicked(image){
@@ -61,6 +72,12 @@ export class ProductDetailsComponent implements OnInit {
   addToCart(e){
     e.preventDefault();
 
+    if(this.user.username === undefined) {
+       this.router.navigateByUrl('/login');
+       this.message.error('Login first, please !');
+       return;
+    }
+
     let productForCart = new CartProduct(
       this.product._id,
       this.product.name,
@@ -74,9 +91,34 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     this.cartService.addProduct(productForCart);
-    this.message.success('Product added to cart!');
+    this.message.success(`Product ${this.product.name} added to cart!`);
   }
 
+  deleteProduct() {
+    this.service.deleteProduct(this.product).subscribe(res => {
+      if(res) {
+        this.router.navigateByUrl(`/products/category/${this.product.category}`);
+        this.message.success(`Product ${this.product.name} deleted !`);
+      }
+
+    });
+  }
+
+  changeParams(){
+    this.descriptionClicked = !this.descriptionClicked;
+  }
+
+  addReview(){
+    let review = {
+      username: this.user.username,
+      comment: this.reviewText
+    };
+
+    this.product.reviews.push(review);
+    this.service.addReview(this.product).subscribe(() => {
+      this.message.success('Review added !');
+    });
+  }
 }
 
 

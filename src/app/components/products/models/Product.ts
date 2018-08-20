@@ -8,5 +8,6 @@ export interface Product {
   details: string,
   price: number,
   quantity: number,
+  reviews: Array<Object>,
   discount?: number,
 }

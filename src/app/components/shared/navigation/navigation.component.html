@@ -20,6 +20,7 @@
                 <li *ngIf="!user.username"><a routerLink="/register">Register</a></li>
                 <li *ngIf="user.isAdmin === 'true'"><a routerLink="/products/product-add">Add Product</a></li>
                 <li *ngIf="user.isAdmin === 'true'"><a routerLink="/categories/category-add">Add Category</a></li>
+                <li *ngIf="user.isAdmin === 'true'"><a routerLink="/categories/all">All Categories</a></li>
                 <li *ngIf="user.username"><a href="#" (click)="logout($event)">Logout</a></li>
               </ul>
             </nav>
@@ -39,7 +40,7 @@
                   <div>Cart <span>({{productsInCart}})</span></div>
                 </a>
               </div>
-              <div class="search">
+              <div class="search" (click)="search()">
                 <div class="search_icon">
                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 										viewBox="0 0 475.084 475.084" style="enable-background:new 0 0 475.084 475.084;"
@@ -69,14 +70,21 @@
   </div>
 
   <!-- Search Panel -->
-  <div class="search_panel trans_300">
+  <div [class]="searchClicked ? 'search_panel trans_300 active' : 'search_panel trans_300'">
     <div class="container">
       <div class="row">
         <div class="col">
           <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-            <form action="#">
-              <input type="text" class="search_input" placeholder="Search" required="required">
-            </form>
+              <input type="text"
+                     class="search_input"
+                     placeholder="Search"
+                     required="required"
+                     #searchInput="ngModel"
+                     [(ngModel)]="input"
+                     name="searchInput">
+            <a class="search_button" (click)="searchProduct()">
+              <span>search</span>
+            </a>
           </div>
         </div>
       </div>

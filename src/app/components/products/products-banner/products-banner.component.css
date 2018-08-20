@@ -40,3 +40,22 @@
 {
   width: 580px;
 }
+.home_title
+{
+  font-size: 60px;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+.home_title span
+{
+  color: #e95a5a;
+}
+.home_text
+{
+  margin-top: 7px;
+}
+.home_text p
+{
+  color: #FFFFFF;
+}

@@ -203,3 +203,7 @@
 {
   margin-top: 18px;
 }
+
+a {
+  cursor: pointer;
+}

@@ -6,6 +6,7 @@ export class ProductAddModel{
                public description: string,
                public details: string,
                public price: number,
-               public quantity: number) {
+               public quantity: number,
+               public discount?: number) {
   }
 }

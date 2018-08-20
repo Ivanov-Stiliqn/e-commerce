@@ -1,0 +1,46 @@
+<banner></banner>
+<div class="checkout">
+  <div class="container">
+    <div class="row">
+
+      <!-- Order Info -->
+
+      <div class="col-lg-9">
+        <div class="order checkout_section">
+          <div class="section_title">Your order</div>
+          <div class="section_subtitle">Order details</div>
+
+          <!-- Order details -->
+          <div class="order_list_container">
+            <div class="order_list_bar d-flex flex-row align-items-center justify-content-start">
+              <div class="order_list_title">Product</div>
+              <div class="order_list_value ml-auto">Total</div>
+            </div>
+            <ul class="order_list">
+              <li class="d-flex flex-row align-items-center justify-content-start" *ngFor="let product of products">
+                <div class="order_list_title">{{product.name}}</div>
+                <div class="order_list_value ml-auto">${{product.price * product.quantity}}</div>
+              </li>
+              <li class="d-flex flex-row align-items-center justify-content-start">
+                <div class="order_list_title">Subtotal</div>
+                <div class="order_list_value ml-auto">${{total | async}}</div>
+              </li>
+              <li class="d-flex flex-row align-items-center justify-content-start">
+                <div class="order_list_title">Shipping</div>
+                <div class="order_list_value ml-auto">Free</div>
+              </li>
+              <li class="d-flex flex-row align-items-center justify-content-start">
+                <div class="order_list_title">Total</div>
+                <div class="order_list_value ml-auto">${{total | async}}</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Order Text -->
+          <div class="order_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra temp or so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</div>
+          <div class="button order_button"><a (click)="checkOut()">Place Order</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ import {Product} from '../../components/products/models/Product';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/state/app.state';
 import {map} from 'rxjs/internal/operators';
-import {AddProduct, RenderProducts} from '../../store/actions/products.actions';
+import {AddProduct, DeleteProduct, EditProduct, RenderProducts} from '../../store/actions/products.actions';
 import {forkJoin, Observable} from 'rxjs';
 
 const appKey = 'kid_BJW3zX1Hm';
@@ -91,4 +91,55 @@ export class ProductsService {
         }
       }));
   }
+
+  editProduct(id: string, product: ProductAddModel) {
+    return this.http.put(url + '/' + id, product)
+      .pipe(map(data => {
+        if (data) {
+          let editedProduct = data as Product;
+          this.store.dispatch(new EditProduct(editedProduct));
+          return editedProduct;
+        }
+      }));
+  }
+
+  deleteProduct(product: Product) {
+    return this.http.delete(url + '/' + product._id)
+      .pipe(map(res => {
+        if(res) {
+          this.store.dispatch(new DeleteProduct(product));
+          return res;
+        }
+      }));
+  }
+
+  getProductByName(name) {
+    if(productsCache){
+
+      return Observable.create((observer) => {
+        return this.store.pipe(select(state => state.products.all.filter(p => p.name.toLowerCase().includes(name.toLowerCase())))).subscribe(product => {
+          observer.next(product)
+        })
+      });
+    }
+
+    return Observable.create((observer) => {
+      this.renderProducts().subscribe(products => {
+        let searchedProduct = products.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
+        observer.next(searchedProduct)
+      })
+    })
+  }
+
+  addReview(product: Product) {
+    return this.http.put(url + '/' + product._id, product)
+      .pipe(map(data => {
+        if (data) {
+          let editedProduct = data as Product;
+          this.store.dispatch(new EditProduct(editedProduct));
+          return editedProduct;
+        }
+      }));
+  }
+
 }
