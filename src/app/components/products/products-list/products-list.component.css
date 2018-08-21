@@ -1,0 +1,10 @@
+.product
+{
+  width: calc((100% - 90px) / 4);
+  margin-bottom: 59px;
+}
+
+.product {
+  display: inline-block;
+  margin-left: 22px;
+}

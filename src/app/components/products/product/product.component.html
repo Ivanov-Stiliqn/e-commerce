@@ -1,0 +1,7 @@
+<div class="product_image"><img src="{{product.image}}" alt=""></div>
+<div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
+<div class="product_content">
+  <div class="product_title"><a
+    routerLink="/products/product-details/{{product._id}}">{{product.name}}</a></div>
+  <div class="product_price">${{product.price}}</div>
+</div>

@@ -1,7 +1,6 @@
 <div>
   <banner></banner>
   <div>
-    <!-- Categories -->
     <div class="products">
 
       <div class="container">
@@ -9,8 +8,6 @@
           <div class="col">
 
             <div class="product_grid">
-              <!-- Product -->
-
               <div class="product" *ngFor="let category of categories$ | async" [@listCategories]>
                 <div class="product_image"><img src="{{category.image}}" alt=""></div>
                 <div class="product_content">
@@ -22,7 +19,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

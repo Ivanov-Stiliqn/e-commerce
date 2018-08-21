@@ -9,7 +9,6 @@ import {AppState} from '../../../store/state/app.state';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {select} from '@ngrx/store';
 import {AuthenticationService} from '../../../core/services/authentication.service';
-import {ProductsService} from '../../../core/services/products.service';
 import {CartService} from '../../../core/services/cart.service';
 
 @Component ({

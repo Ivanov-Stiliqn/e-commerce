@@ -1,0 +1,32 @@
+<!-- Products -->
+<div class="container">
+    <div class="row">
+      <div class="col">
+
+        <div class="product_grid">
+          <!-- Product -->
+
+          <div class="product" *ngFor="let product of products$ | async | paginate: {
+              id: 'allProducts',
+              itemsPerPage: pageSize,
+              currentPage: currentPage}" [@listProducts]>
+           <single-product [product]="product"></single-product>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <pagination-controls (click)="controlsClicked()"
+      id="allProducts"
+      (pageChange)="currentPage = $event"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [previousLabel]="'Previous'"
+      [nextLabel]="'Next'"
+      [screenReaderPaginationLabel]="'Pagination'"
+      [screenReaderPageLabel]="'page'"
+      [screenReaderCurrentLabel]="'You are on page'">
+    </pagination-controls>
+</div>
+

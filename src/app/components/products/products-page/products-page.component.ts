@@ -12,24 +12,13 @@ import {Category} from '../../categories/models/Category';
 @Component({
   selector: 'app-products-page',
   templateUrl: './products-page.component.html',
-  styleUrls: ['./products-page.component.css'],
-  animations: [
-    trigger('listProducts', [
-    transition('void => *', [
-      style({
-        opacity: 0,
-        transform: 'translateX(-100px)'
-      }),
-      animate(300)
-    ]),])]
+  styleUrls: ['./products-page.component.css']
 })
 export class ProductsPageComponent implements OnInit {
   products$: Observable<Product[]>;
   category: Category;
   id: string;
   displaySpinner: boolean = true;
-  currentPage = 1;
-  pageSize = 8;
 
   constructor(private route: ActivatedRoute,
               private store: Store<AppState>,
@@ -43,13 +32,12 @@ export class ProductsPageComponent implements OnInit {
       this.store.pipe(select(state => state.categories.all)).subscribe(categories => {
         if(categories.length > 0){
           this.category = categories.filter(c => c._id === this.id)[0];
+
           this.displaySpinner = false;
         }
       });
 
-
      this.products$ = this.productsService.renderProductsByCategory(this.id);
    });
-
   }
 }

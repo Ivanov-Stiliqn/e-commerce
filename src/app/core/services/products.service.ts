@@ -48,7 +48,7 @@ export class ProductsService {
       })
     }
 
-    return this.http.get(url + `?query={"category": "${id}"}`).pipe(map(data => {
+    return this.http.get(url + `?query={"category": "${id}"}&sort={"_kmd.ect": -1}`).pipe(map(data => {
       return data as Product[]
     }));
   }
@@ -117,16 +117,16 @@ export class ProductsService {
     if(productsCache){
 
       return Observable.create((observer) => {
-        return this.store.pipe(select(state => state.products.all.filter(p => p.name.toLowerCase().includes(name.toLowerCase())))).subscribe(product => {
-          observer.next(product)
+        return this.store.pipe(select(state => state.products.all.filter(p => p.name.toLowerCase().includes(name.toLowerCase())))).subscribe(products => {
+          observer.next(products)
         })
       });
     }
 
     return Observable.create((observer) => {
       this.renderProducts().subscribe(products => {
-        let searchedProduct = products.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
-        observer.next(searchedProduct)
+        let searchedProducts = products.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
+        observer.next(searchedProducts)
       })
     })
   }

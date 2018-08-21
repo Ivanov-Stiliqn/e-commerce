@@ -7,42 +7,14 @@ import {
   group,
   query
 } from '@angular/animations';
+import {sliderAnimations} from '../../shared/app.animations';
 
 
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css'],
-  animations: [
-    trigger('slider', [
-      transition(':increment', group([
-        query(':enter', [
-          style({
-            left: '100%'
-          }),
-          animate('0.5s ease-out', style('*'))
-        ]),
-        query(':leave', [
-          animate('0.5s ease-out', style({
-            left: '-100%'
-          }))
-        ])
-      ])),
-      transition(':decrement', group([
-        query(':enter', [
-          style({
-            left: '100%'
-          }),
-          animate('0.5s ease-out', style('*'))
-        ]),
-        query(':leave', [
-          animate('0.5s ease-out', style({
-            left: '-100%'
-          }))
-        ])
-      ])),
-    ])
-  ]
+  animations: sliderAnimations
 })
 
 export class SliderComponent {

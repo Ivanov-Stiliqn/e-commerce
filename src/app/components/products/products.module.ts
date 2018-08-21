@@ -16,14 +16,22 @@ import {RadarSpinnerModule} from 'angular-epic-spinners';
 import {CartService} from '../../core/services/cart.service';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import {CustomFormsModule} from 'ng2-validation';
-import {AuthenticationService} from '../../core/services/authentication.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ProductsSearchComponent} from './products-search/products-search.component';
 import {AdminGuard} from '../../core/guards/admin.guard';
-import {CanActivateRouteGuard} from '../../core/guards/auth.guard';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [ProductsPageComponent, ProductsBannerComponent, ProductDetailsComponent, ProductAddComponent, ProductEditComponent, ProductsSearchComponent],
+  declarations: [
+    ProductsPageComponent,
+    ProductsBannerComponent,
+    ProductDetailsComponent,
+    ProductAddComponent,
+    ProductEditComponent,
+    ProductsSearchComponent,
+    ProductsListComponent,
+    ProductComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -35,7 +43,7 @@ import {CanActivateRouteGuard} from '../../core/guards/auth.guard';
     RadarSpinnerModule,
     CustomFormsModule,
     NgxPaginationModule],
-  exports: [],
+  exports: [ProductComponent],
   providers: [ProductsService, CartService, AdminGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

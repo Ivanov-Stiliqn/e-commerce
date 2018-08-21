@@ -119,22 +119,10 @@
       </div>
       <div class="row">
         <div class="col">
-
           <div class="product_grid">
-
-            <!-- Product -->
             <div class="product" *ngFor="let item of otherProducts">
-              <div class="product_image"><img src="{{item.image}}" alt=""></div>
-              <div class="product_extra product_sale" *ngIf="item.discount"><a href="#">Sale</a></div>
-              <div class="product_content">
-                <div class="product_title"><a routerLink="/products/product-details/{{item._id}}">{{item.name}}</a>
-                </div>
-                <div class="product_price">${{item.price}}</div>
-              </div>
+              <single-product [product]="item"></single-product>
             </div>
-
-            <!-- Product -->
-
           </div>
         </div>
       </div>

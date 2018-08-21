@@ -6,47 +6,10 @@
   </app-radar-spinner>
 </div>
 <div [hidden]="displaySpinner">
-  <products-banner [image]="category.image" [name]="category.name"></products-banner>
+  <products-banner *ngIf='category' [image]="category.image" [name]="category.name"></products-banner>
   <div>
-    <!-- Products -->
     <div class="products">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-
-            <div class="product_grid">
-              <!-- Product -->
-
-              <div class="product" *ngFor="let product of products$ | async | paginate: {
-              id: 'allFurnitures',
-              itemsPerPage: pageSize,
-              currentPage: currentPage}" [@listProducts]>
-                <div class="product_image"><img src="{{product.image}}" alt=""></div>
-                <div class="product_extra product_sale" *ngIf="product.discount"><a href="#">Sale</a></div>
-                <div class="product_content">
-                  <div class="product_title"><a
-                    routerLink="/products/product-details/{{product._id}}">{{product.name}}</a></div>
-                  <div class="product_price">${{product.price}}</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <pagination-controls
-          id="allFurnitures"
-          (pageChange)="currentPage = $event"
-          [maxSize]="9"
-          [directionLinks]="true"
-          [autoHide]="true"
-          [previousLabel]="'Previous'"
-          [nextLabel]="'Next'"
-          [screenReaderPaginationLabel]="'Pagination'"
-          [screenReaderPageLabel]="'page'"
-          [screenReaderCurrentLabel]="'You are on page'">
-        </pagination-controls>
-      </div>
-
+      <products-list [products$]="products$"></products-list>
       <app-icons></app-icons>
     </div>
   </div>
