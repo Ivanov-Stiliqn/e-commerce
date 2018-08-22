@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
 import {Product} from '../models/Product';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,6 @@ import {ProductsService} from '../../../core/services/products.service';
 import {CartProduct} from '../../cart/models/cart-product.model';
 import {CartService} from '../../../core/services/cart.service';
 import {MessageActions} from '../../../core/message.actions';
-import {AuthenticationService} from '../../../core/services/authentication.service';
 import {map} from 'rxjs/internal/operators';
 import {User} from '../../users/models/User';
 

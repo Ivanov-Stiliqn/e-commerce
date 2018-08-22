@@ -49,7 +49,7 @@ export class TokenInterceptor implements HttpInterceptor {
       else{
         req = req.clone({
           setHeaders: {
-            'Authorization': `Basic ${btoa(`${guest}:${guest}`)}`,
+            'Authorization': `Basic ${btoa(`${guest}:${password}`)}`,
             'Content-Type': 'application/json'
           }
         });

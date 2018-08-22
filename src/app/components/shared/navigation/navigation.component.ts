@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MessageActions} from '../../../core/message.actions';
 import {Category} from '../../categories/models/Category';
@@ -17,7 +17,7 @@ import {CartService} from '../../../core/services/cart.service';
   styleUrls: ['./navigation.component.css']
 })
 
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   user: User;
   categories: Observable<Category[]>;
   productsInCart: number;

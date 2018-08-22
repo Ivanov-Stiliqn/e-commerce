@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {LoginModel} from '../../components/users/models/login.model';
 import {RegisterModel} from '../../components/users/models/register.model';
 import {map} from 'rxjs/internal/operators';
-import * as UserActions from '../../store/actions/users.actions';
 import {User} from '../../components/users/models/User';
 import {AppState} from '../../store/state/app.state';
 import {Store} from '@ngrx/store';

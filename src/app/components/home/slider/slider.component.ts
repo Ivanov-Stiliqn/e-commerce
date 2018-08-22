@@ -1,12 +1,4 @@
-import {Component} from '@angular/core';
-import {
-  trigger,
-  animate,
-  transition,
-  style,
-  group,
-  query
-} from '@angular/animations';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {sliderAnimations} from '../../shared/app.animations';
 
 
@@ -17,7 +9,7 @@ import {sliderAnimations} from '../../shared/app.animations';
   animations: sliderAnimations
 })
 
-export class SliderComponent {
+export class SliderComponent implements OnInit, OnDestroy{
   isHome: boolean;
 
   public _images: string[] = ['../../../assets/images/home_slider_1.jpg',
@@ -44,7 +36,6 @@ export class SliderComponent {
   }
 
   newSlide() {
-    console.log(this.selectedIndex);
     if (this.selectedIndex === this._images.length - 1) {
       this.selectedIndex = 0;
     }

@@ -5,7 +5,6 @@ import {AppState} from '../../../store/state/app.state';
 import {ProductsService} from '../../../core/services/products.service';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute} from '@angular/router';
-import {animate, style, transition, trigger} from '@angular/animations';
 import {Category} from '../../categories/models/Category';
 
 

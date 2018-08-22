@@ -1,10 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from '../../products/models/Product';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../store/state/app.state';
 import {ProductsService} from '../../../core/services/products.service';
 import {Observable} from 'rxjs';
-import * as ProductsActions from '../../../store/actions/products.actions';
 
 @Component({
   selector: 'home',
@@ -12,7 +9,7 @@ import * as ProductsActions from '../../../store/actions/products.actions';
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   products: Observable<Product[]>;
   displaySpinner = true;
 

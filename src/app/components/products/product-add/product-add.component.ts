@@ -1,12 +1,10 @@
-import {Component} from '@angular/core';
-import {forkJoin, Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 import {ProductsService} from '../../../core/services/products.service';
 import {ProductAddModel} from '../models/product-add.model';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
 import {Category} from '../../categories/models/Category';
-import {AddProduct} from '../../../store/actions/products.actions';
-import {Product} from '../models/Product';
 import {Router} from '@angular/router';
 import {MessageActions} from '../../../core/message.actions';
 
@@ -15,7 +13,7 @@ import {MessageActions} from '../../../core/message.actions';
   templateUrl: './product-add.component.html',
   styleUrls: ['../../shared/forms.css']
 })
-export class ProductAddComponent {
+export class ProductAddComponent implements OnInit {
   files: File[] = [];
   categories: Observable<Category[]>;
   product = new ProductAddModel('','','',[], '', '', null, null);
