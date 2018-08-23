@@ -1,27 +1,44 @@
 # ECommerse
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+- Redux integration
+- Cloudinary file upload integration
+- Kinvey back-end
+- EmailJS service for sending emails
+- Currency current rates from https://openexchangerates.org
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Functionality
+### Guest
+- Can see all products
+- Can see product details
+- Can change to prefered currency
+- Can login and register
+- Can use the search
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Users
+- Can see all products
+- Can see product details
+- Can change to prefered currency
+- Can login and register
+- Can use the search
+- Can add products to cart
+- Can clear and update the cart
+- Can purchase a product through checkout
+- Can add reviews to products
 
-## Build
+### Admin
+username: Admin
+password: admin
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Can see all products
+- Can see product details
+- Can use the search
+- Can see all categories
+- Can add/edit/delete categories
+- Can add/edit/delete products
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
