@@ -27,8 +27,8 @@
         <div class="col-lg-6">
           <div class="details_content">
             <div class="details_name">{{product.name}}</div>
-            <div *ngIf="product.discount" class="details_discount">${{product.discount}}</div>
-            <div class="details_price">${{product.price}}</div>
+            <div *ngIf="product.discount" class="details_discount">{{product.discount | currencyTransform}}</div>
+            <div class="details_price">{{product.price | currencyTransform}}</div>
 
             <!-- In Stock -->
             <div class="in_stock_container">
@@ -92,7 +92,7 @@
                 <textarea
                        class="form-control review"
                        placeholder="Please add your opinion here !"
-                       required="required"
+                       required
                        #review="ngModel"
                        [(ngModel)]="reviewText"
                        name="review">
@@ -110,11 +110,11 @@
 
   <!-- Products -->
 
-  <div class="products" *ngIf="otherProducts && otherProducts.length > 0">
+  <div class="products">
     <div class="container">
       <div class="row">
         <div class="col text-center">
-          <div class="products_title">Related Products</div>
+          <div class="products_title" *ngIf="otherProducts && otherProducts.length > 0">New Products</div>
         </div>
       </div>
       <div class="row">

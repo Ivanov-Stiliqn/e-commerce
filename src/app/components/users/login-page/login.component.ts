@@ -3,6 +3,7 @@ import {LoginModel} from '../models/login.model';
 import {Router} from '@angular/router';
 import {MessageActions} from '../../../core/message.actions';
 import {AuthenticationService} from '../../../core/services/authentication.service';
+import {validateLogin} from '../../../core/utilities/validator';
 
 
 @Component({
@@ -21,6 +22,12 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    let check = validateLogin(this.user.username, this.user.password);
+    if(check !== ''){
+      this.message.error(check);
+      return;
+    }
+
     this.service.login(this.user).subscribe(user => {
       if(user) {
         this.router.navigateByUrl('/');

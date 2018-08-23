@@ -7,6 +7,7 @@ import {ProductsService} from '../../../core/services/products.service';
 import {Category} from '../../categories/models/Category';
 import {ProductAddModel} from '../models/product-add.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {validateProduct} from '../../../core/utilities/validator';
 
 @Component({
   selector: 'app-product-edit',
@@ -45,6 +46,12 @@ export class ProductEditComponent implements OnInit {
   }
 
   onSubmit() {
+    let check = validateProduct(this.product.category, this.product.name, this.product.description, this.product.details, this.product.price, this.product.quantity, this.product.discount);
+    if(check !== '') {
+      this.message.error(check);
+      return;
+    }
+
     this.message.warning('Loading....');
     if(this.files.length > 0){
       this.service.uploadImages(this.files).subscribe(data => {

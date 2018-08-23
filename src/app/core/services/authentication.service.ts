@@ -6,7 +6,7 @@ import {map} from 'rxjs/internal/operators';
 import {User} from '../../components/users/models/User';
 import {AppState} from '../../store/state/app.state';
 import {Store} from '@ngrx/store';
-import {LoginUser, LogoutUser, RegisterUser, SeedUser} from '../../store/actions/users.actions';
+import {LoginUser, LogoutUser, SeedUser} from '../../store/actions/users.actions';
 
 const appKey = "kid_BJW3zX1Hm";
 const registerUrl = `https://baas.kinvey.com/user/${appKey}`;
@@ -28,7 +28,6 @@ export class AuthenticationService {
 
   register(user: RegisterModel){
     return this.http.post(registerUrl, JSON.stringify(user)).pipe(map(data => {
-      this.store.dispatch(new RegisterUser(data as User));
       return data as User;
     }))
   }

@@ -5,7 +5,6 @@ import {USERS_INITIAL_STATE, UsersState} from '../state/users.state';
 export function usersReducer (state: UsersState = USERS_INITIAL_STATE, action: UserActions.Types) {
   switch (action.type){
     case UserActions.USER_LOGIN:
-    case UserActions.USER_REGISTER:
     case UserActions.SEED_USER:
       return Object.assign({}, state, {
         current: action.payload

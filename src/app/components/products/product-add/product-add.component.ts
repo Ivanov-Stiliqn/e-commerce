@@ -7,6 +7,7 @@ import {AppState} from '../../../store/state/app.state';
 import {Category} from '../../categories/models/Category';
 import {Router} from '@angular/router';
 import {MessageActions} from '../../../core/message.actions';
+import {validateProduct} from '../../../core/utilities/validator';
 
 @Component({
   selector: 'app-product-add',
@@ -32,6 +33,12 @@ export class ProductAddComponent implements OnInit {
   onSubmit() {
     if(this.files.length === 0){
       this.message.warning('Please add at least one image !');
+      return;
+    }
+
+    let check = validateProduct(this.product.category, this.product.name, this.product.description, this.product.details, this.product.price, this.product.quantity);
+    if(check !== '') {
+      this.message.error(check);
       return;
     }
 

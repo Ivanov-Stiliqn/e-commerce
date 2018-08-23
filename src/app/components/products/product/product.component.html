@@ -3,5 +3,5 @@
 <div class="product_content">
   <div class="product_title"><a
     routerLink="/products/product-details/{{product._id}}">{{product.name}}</a></div>
-  <div class="product_price">${{product.price}}</div>
+  <div class="product_price">{{product.price | currencyTransform}}</div>
 </div>

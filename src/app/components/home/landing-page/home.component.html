@@ -1,4 +1,4 @@
-<div [hidden]="!displaySpinner" class="spinner">
+<div *ngIf="displaySpinner" class="spinner">
   <app-radar-spinner
     [animationDuration]="1000"
     [size]="200"
@@ -6,7 +6,7 @@
   </app-radar-spinner>
 </div>
 
-<div [hidden]="displaySpinner">
+<div *ngIf="!displaySpinner">
   <slider></slider>
   <app-upper-ads></app-upper-ads>
 

@@ -7,9 +7,10 @@ import {User} from '../../users/models/User';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
 import {CategoriesService} from '../../../core/services/categories.service';
-import {select} from '@ngrx/store';
 import {AuthenticationService} from '../../../core/services/authentication.service';
 import {CartService} from '../../../core/services/cart.service';
+import {CurrencyService} from '../../../core/services/currency.service';
+import {map} from 'rxjs/internal/operators';
 
 @Component ({
   selector: 'navigation',
@@ -23,29 +24,35 @@ export class NavigationComponent implements OnInit {
   productsInCart: number;
   searchClicked: boolean = false;
   input = '';
+  currency: string;
 
   constructor(private router: Router,
               private message: MessageActions,
               private service: CategoriesService,
               private store: Store<AppState>,
               private authService: AuthenticationService,
-              private cartService: CartService) {}
+              private cartService: CartService,
+              private currencyService: CurrencyService) {}
 
   ngOnInit() {
     this.service.renderCategories().subscribe(() => {
-      this.categories = this.store.pipe(select(state => state.categories.all));
+      this.categories = this.store.pipe(map(state => state.categories.all));
     });
 
     this.cartService.renderProducts().subscribe(() => {
-      this.store.pipe(select(state => state.cart.products)).subscribe(products => {
+      this.store.pipe(map(state => state.cart.products)).subscribe(products => {
         this.productsInCart = products.length;
       });
     });
 
 
-    this.store.pipe(select(state => state.auth.current)).subscribe(user => {
+    this.store.pipe(map(state => state.auth.current)).subscribe(user => {
       this.user = user;
     });
+
+    this.store.pipe(map(state => state.products.currency)).subscribe(data => {
+      this.currency = data;
+    })
   }
 
   logout(event) {
@@ -64,5 +71,12 @@ export class NavigationComponent implements OnInit {
      this.searchClicked = false;
      this.router.navigateByUrl(`/products/products-search/${this.input}`);
      this.input = '';
+  }
+
+  changeCurrency(){
+    this.currencyService.changeCurrency(this.currency).subscribe(() => {
+      this.message.success(`Currency changed to: ${this.currency}`);
+      this.router.navigateByUrl('/')
+    });
   }
 }

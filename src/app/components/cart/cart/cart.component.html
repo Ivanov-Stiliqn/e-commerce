@@ -28,7 +28,7 @@
             </div>
           </div>
           <!-- Price -->
-          <div class="cart_item_price">${{product.price}}</div>
+          <div class="cart_item_price">{{product.price | currencyTransform}}</div>
           <!-- Quantity -->
           <div class="cart_item_quantity">
             <div class="product_quantity_container">
@@ -40,7 +40,7 @@
           </div>
           <!-- Total -->
           <div class="cart_item_total">
-            ${{product.price * product.quantity}}
+            {{product.price * product.quantity | currencyTransform}}
           </div>
           <div class="cart_item_remove">
             <div class="button" [hidden]="!cartUpdate"><a (click)="removeProduct(product._id, product.name)">Remove</a></div>
@@ -70,7 +70,7 @@
             <ul>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="cart_total_title">Total</div>
-                <div class="cart_total_value ml-auto">${{total}}</div>
+                <div class="cart_total_value ml-auto">{{total | currencyTransform}}</div>
               </li>
             </ul>
           </div>

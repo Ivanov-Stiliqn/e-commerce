@@ -9,6 +9,7 @@ import {CartService} from '../../../core/services/cart.service';
 import {MessageActions} from '../../../core/message.actions';
 import {map} from 'rxjs/internal/operators';
 import {User} from '../../users/models/User';
+import {validateReview} from '../../../core/utilities/validator';
 
 @Component({
   selector: 'app-product-details',
@@ -108,6 +109,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addReview(){
+    let check = validateReview(this.reviewText);
+    if(check !== ''){
+      this.message.error(check);
+      return;
+    }
+
     let review = {
       username: this.user.username,
       comment: this.reviewText

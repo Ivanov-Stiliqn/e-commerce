@@ -61,7 +61,18 @@
 									</svg>
                 </div>
               </div>
-              <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+              <div class="search" *ngIf="!user.username || user.username && user.isAdmin ==='false'">
+                <select id="currency"
+                        class="form-control"
+                        name="currency_input"
+                        #currency_input="ngModel"
+                        [(ngModel)]="currency"
+                        (change)="changeCurrency()">
+                  <option>USD</option>
+                  <option>EUR</option>
+                  <option>BGN</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

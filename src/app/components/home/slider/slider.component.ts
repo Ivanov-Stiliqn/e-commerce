@@ -44,4 +44,9 @@ export class SliderComponent implements OnInit, OnDestroy{
     }
   }
 
+  scrollToProducts(e) {
+    e.preventDefault();
+    window.scrollTo(1400, 1400);
+  }
+
 }

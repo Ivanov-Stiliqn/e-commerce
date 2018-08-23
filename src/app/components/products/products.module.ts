@@ -22,6 +22,7 @@ import {AdminGuard} from '../../core/guards/admin.guard';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductComponent } from './product/product.component';
 
+
 @NgModule({
   declarations: [
     ProductsPageComponent,
@@ -31,7 +32,8 @@ import { ProductComponent } from './product/product.component';
     ProductEditComponent,
     ProductsSearchComponent,
     ProductsListComponent,
-    ProductComponent],
+    ProductComponent
+  ],
   imports: [
     CommonModule,
     ProductsRoutingModule,

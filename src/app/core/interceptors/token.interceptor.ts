@@ -74,7 +74,9 @@ export class TokenInterceptor implements HttpInterceptor {
             this.router.navigate(['/not-found']);
             break;
           default:
-            this.message.error(err['error']['description']);
+            if(err.status !== 200){
+              this.message.error(err['error']['description']);
+            }
             break;
         }
       }

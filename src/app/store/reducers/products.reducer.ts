@@ -22,6 +22,14 @@ export function productsReducer (state: ProductsState = PRODUCTS_INITIAL_STATE, 
       return Object.assign({}, state, {
         all: state.all.filter(p => p._id !== removedProduct._id)
       });
+    case ProductsActions.CHANGE_PRODUCTS_CURRENCY:
+      let currency = action.payload['currency'];
+      let rate = action.payload['rate'];
+      return Object.assign({}, state, {
+        currency: currency,
+        rate: rate,
+        currencyChanged: currency !== state.currency
+      });
     default:
       return state;
   }

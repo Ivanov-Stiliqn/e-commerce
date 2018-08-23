@@ -5,6 +5,7 @@ import {CategoryAddModel} from '../models/category-add.model';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/state/app.state';
+import {validateCategory} from '../../../core/utilities/validator';
 
 @Component({
   selector: 'app-category-edit',
@@ -37,6 +38,12 @@ export class CategoryEditComponent implements OnInit {
   }
 
   onSubmit() {
+    let check = validateCategory(this.category.name);
+    if(check !== '') {
+      this.message.error(check);
+      return;
+    }
+
     this.message.warning('Loading....');
     if(this.file.name !== undefined){
 

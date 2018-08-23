@@ -19,11 +19,11 @@
             <ul class="order_list">
               <li class="d-flex flex-row align-items-center justify-content-start" *ngFor="let product of products">
                 <div class="order_list_title">{{product.name}}</div>
-                <div class="order_list_value ml-auto">${{product.price * product.quantity}}</div>
+                <div class="order_list_value ml-auto">{{product.price * product.quantity | currencyTransform}}</div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="order_list_title">Subtotal</div>
-                <div class="order_list_value ml-auto">${{total | async}}</div>
+                <div class="order_list_value ml-auto">{{total | async | currencyTransform}}</div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="order_list_title">Shipping</div>
@@ -31,7 +31,7 @@
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="order_list_title">Total</div>
-                <div class="order_list_value ml-auto">${{total | async}}</div>
+                <div class="order_list_value ml-auto">{{total | async | currencyTransform}}</div>
               </li>
             </ul>
           </div>

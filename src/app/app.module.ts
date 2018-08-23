@@ -25,6 +25,7 @@ import { BottomAdsComponent } from './components/home/static/bottom-ads/bottom-a
 import {CartModule} from './components/cart/cart.module';
 import {AuthenticationService} from './core/services/authentication.service';
 import {AdminGuard} from './core/guards/admin.guard';
+import {CurrencyService} from './core/services/currency.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {AdminGuard} from './core/guards/admin.guard';
     MessageActions,
     AuthenticationService,
     CanActivateRouteGuard,
+    CurrencyService,
     AdminGuard, {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
