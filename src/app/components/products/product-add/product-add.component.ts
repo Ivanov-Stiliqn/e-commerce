@@ -32,7 +32,7 @@ export class ProductAddComponent implements OnInit {
 
   onSubmit() {
     if(this.files.length === 0){
-      this.message.warning('Please add at least one image !');
+      this.message.error('Please add at least one image !');
       return;
     }
 

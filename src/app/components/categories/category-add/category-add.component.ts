@@ -30,6 +30,11 @@ export class CategoryAddComponent {
       return;
     }
 
+    if(this.file.name === undefined){
+      this.message.error('Upload an image, please !');
+      return;
+    }
+
     this.message.warning('Loading....');
     this.service.uploadImage(this.file)
       .subscribe(data => {
