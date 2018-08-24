@@ -58,7 +58,7 @@ export function validateProduct(category, name, description, details, price, qua
     return 'Category is required !'
   }
 
-  let nameRegex = new RegExp('^[a-zA-z0-9]+$');
+  let nameRegex = new RegExp('^[a-zA-z0-9 ]+$');
   let nameCheck = nameRegex.exec(name);
   if(!nameCheck){
     return 'Product name must contain only letters and digits !'
@@ -93,7 +93,7 @@ export function validateProduct(category, name, description, details, price, qua
 }
 
 export function validateCategory(name) {
-  let nameRegex = new RegExp('^[a-zA-z0-9]+$');
+  let nameRegex = new RegExp('^[a-zA-z0-9 ]+$');
   let nameCheck = nameRegex.exec(name);
   if(!nameCheck){
     return 'Category name must contain only letters and digits !'
